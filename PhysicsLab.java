@@ -4,7 +4,18 @@ import java.awt.Container;
 import javax.swing.KeyStroke;
 import java.awt.event.*;
 
-public class PhysicsLab {
+public class PhysicsLab extends JApplet{
+
+	public void init()
+	{  
+		MyWorld world = new MyWorld();
+		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
+		
+		MyWorldView  worldView = new MyWorldView(world);
+		world.setView(worldView);
+		add(worldView);  
+	}
+
 	public static void main(String[] args) {
 		PhysicsLab_GUI lab_gui = new PhysicsLab_GUI();
 		lab_gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
