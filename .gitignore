@@ -6,7 +6,7 @@
 *.css
 package-list
 *.gif
-
+!PhysicsLab.html
 
 
 # Mobile Tools for Java (J2ME)
