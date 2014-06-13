@@ -72,3 +72,9 @@ rebuild:
 
 rerun:
 	make rebuild && make run
+
+jar:
+	jar cf PhysicsLab.jar *.class PhysicsLab.class
+
+runApplet:
+	appletviewer PhysicsLab.html
