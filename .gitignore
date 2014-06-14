@@ -7,6 +7,7 @@
 package-list
 *.gif
 !PhysicsLab.html
+*.jar
 
 
 # Mobile Tools for Java (J2ME)
