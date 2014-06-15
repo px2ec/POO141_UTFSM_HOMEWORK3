@@ -68,6 +68,10 @@ public class LabMenuListener implements ActionListener {
 			world.addElement(rb0);
 		}
 
+		if (text.equals("Oscillator")){
+			world.addElement(new Oscillator(0.5,0.1,0.5));
+		}
+
 		// Actions associated to MyWorld submenu
 		if (text.equals("Start")) world.start();
 

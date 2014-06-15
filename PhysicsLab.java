@@ -12,6 +12,10 @@ public class PhysicsLab extends JApplet{
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
 		
 		MyWorldView  worldView = new MyWorldView(world);
+		PhysicsLab_GUI_OnlyMenu labmenugui = new PhysicsLab_GUI_OnlyMenu(world);
+
+		labmenugui.setVisible(true);
+
 		world.setView(worldView);
 
 		getParamFromHTML(world);
@@ -26,6 +30,7 @@ public class PhysicsLab extends JApplet{
 		int fixedHookNum = 0;
 		int blockNum = 0;
 		int rubberNum = 0;
+		int ocillatorNum = 0;
 
 		if (getParameter("ballNum") != null)
 			ballNum = Integer.parseInt(getParameter("ballNum"));
@@ -41,6 +46,9 @@ public class PhysicsLab extends JApplet{
 		
 		if (getParameter("rubberNum") != null)
 			rubberNum = Integer.parseInt(getParameter("rubberNum"));
+
+		if (getParameter("ocillatorNum") != null)
+			ocillatorNum = Integer.parseInt(getParameter("ocillatorNum"));
 		
 
 		for (int j = 0; j < ballNum; j++) {
@@ -56,7 +64,7 @@ public class PhysicsLab extends JApplet{
 			String springparams = getParameter("spring." + (j + 1));
 
 			String springvalues[] = springparams.split(";");
-			Spring sp0 = new Spring(Double.parseDouble(springvalues[0]), Double.parseDouble(springvalues[0]));
+			Spring sp0 = new Spring(Double.parseDouble(springvalues[0]), Double.parseDouble(springvalues[1]));
 			world.addElement(sp0);
 		}
 
@@ -73,8 +81,8 @@ public class PhysicsLab extends JApplet{
 
 			String blockvalues[] = blockparams.split(";");
 			Block bl = new Block(Double.parseDouble(blockvalues[0]), 
-				Double.parseDouble(blockvalues[0]), Double.parseDouble(blockvalues[0]), 
-				Double.parseDouble(blockvalues[0]), Double.parseDouble(blockvalues[0]));
+				Double.parseDouble(blockvalues[0]), Double.parseDouble(blockvalues[1]), 
+				Double.parseDouble(blockvalues[2]), Double.parseDouble(blockvalues[3]));
 			world.addElement(bl);
 		}
 
@@ -82,8 +90,17 @@ public class PhysicsLab extends JApplet{
 			String rubberparams = getParameter("rubber." + (j + 1));
 
 			String rubbervalues[] = rubberparams.split(";");
-			Rubber rb0 = new Rubber(Double.parseDouble(rubbervalues[0]), Double.parseDouble(rubbervalues[0]));
+			Rubber rb0 = new Rubber(Double.parseDouble(rubbervalues[0]), Double.parseDouble(rubbervalues[1]));
 			world.addElement(rb0);
+		}		
+
+		for (int j = 0; j < ocillatorNum; j++) {
+			String ocillatorparams = getParameter("ocillator." + (j + 1));
+
+			String ocillatorvalues[] = ocillatorparams.split(";");
+			Oscillator osc0 = new Oscillator(Double.parseDouble(ocillatorvalues[0]),
+					 Double.parseDouble(ocillatorvalues[1]), Double.parseDouble(ocillatorvalues[2]));
+			world.addElement(osc0);
 		}
 
 	}
@@ -137,6 +154,10 @@ class PhysicsLab_GUI extends JFrame {
 		menuItem.addActionListener(menu_l);
 		subMenu.add(menuItem);
 
+		menuItem = new JMenuItem("Oscillator");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
 		menuItem = new JMenuItem("My scenario");
 		menuItem.addActionListener(menu_l);
 		subMenu.add(menuItem);
@@ -174,3 +195,88 @@ class PhysicsLab_GUI extends JFrame {
 		return mb;
 	}
 }
+
+
+class PhysicsLab_GUI_OnlyMenu extends JFrame {
+	public PhysicsLab_GUI_OnlyMenu(MyWorld w) {
+		MyWorld world = w;
+		setTitle("My Small and Nice Physics Laboratory");
+		setSize(MyWorldView.WIDTH, 100);  // height+50 to account for menu height
+
+		LabMenuListener menuListener = new LabMenuListener(world);
+		this.setJMenuBar(this.createLabMenuBar(menuListener));
+
+	}
+
+	public JMenuBar createLabMenuBar(LabMenuListener menu_l) {
+		JMenuBar mb = new JMenuBar();
+		
+		JMenu menu = new JMenu ("Configuration");
+		mb.add(menu);
+		JMenu subMenu = new JMenu("Insert");  
+		menu.add(subMenu);
+		
+		JMenuItem menuItem = new JMenuItem("Ball");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("Spring");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("Fixed Hook");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("Block");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("Rubber");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("Oscillator");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+
+		menuItem = new JMenuItem("My scenario");
+		menuItem.addActionListener(menu_l);
+		subMenu.add(menuItem);
+ 
+		menu = new JMenu("MyWorld");
+		mb.add(menu);
+		menuItem = new JMenuItem("Start");
+		menuItem.addActionListener(menu_l);
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Stop");
+		menuItem.addActionListener(menu_l);
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Next Item");
+		menuItem.addActionListener(menu_l);
+		menu.add(menuItem);
+
+		JMenu submenu = new JMenu("Simulator");
+
+		menuItem = new JMenuItem("Delta time");
+		menuItem.addActionListener(menu_l);
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItem("View refresh time");
+		menuItem.addActionListener(menu_l);
+		submenu.add(menuItem);
+
+		menuItem = new JMenuItem("Set gravity");
+		menuItem.addActionListener(menu_l);
+		submenu.add(menuItem);
+
+		menu.add(submenu);
+		return mb;
+	}
+
+}
+
+
+
