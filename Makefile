@@ -3,6 +3,9 @@ JVM = java
 JDOC = javadoc
 JFLAGS = -g
 
+JAR = jar
+JARFLAGS = cmf
+
 CLASSES = \
 	Ball.class \
 	BallView.class \
@@ -51,18 +54,27 @@ SOURCES = \
 
 MAIN = PhysicsLab
 
-.SUFFIXES: .java .class
+JARFILE = $(MAIN).jar
+
+.SUFFIXES: .java .class .jar
 
 .java.class:
 	$(JC) $(JFLAGS) $<
 
-all: $(CLASSES)
+.java.jar: $(CLASSES)
+	echo Main-Class: $(MAIN) > MANIFEST.mf
+	$(JAR) $(JARFLAGS) MANIFEST.mf $(JARFILE) *.class
+
+all: $(CLASSES) $(JARFILE)
 
 doc: $(SOURCES)
 	$(JDOC) -author $(SOURCES) -d Documentation
 
-run: $(MAIN).class
+runclass: $(MAIN).class
 	$(JVM) $(MAIN)
+
+run: $(JARFILE)
+	$(JVM) -$(JAR) $(JARFILE)
 
 clean:
 	rm -rf *.class *.jar
@@ -76,10 +88,6 @@ rebuild:
 
 rerun:
 	make rebuild && make run
-
-jar:
-	echo Main-Class: PhysicsLab > MANIFEST.mf
-	jar cmf MANIFEST.mf PhysicsLab.jar *.class
 
 runApplet:
 	appletviewer PhysicsLab.html
