@@ -4,6 +4,8 @@ import java.awt.Graphics2D;
 import java.awt.geom.*; 
 import java.awt.*;
 import java.util.*;
+import java.awt.event.*;
+import javax.swing.*;
 
 public class MyWorldView extends JPanel { 
 	/* BEGIN declarations to use metric coordinate system (not pixels) */
@@ -50,7 +52,34 @@ public class MyWorldView extends JPanel {
 		addMouseMotionListener(mListener);
 		addMouseListener(mListener);
 		addKeyListener(mListener);
-		setFocusable(true);
+		setFocusable(true);    
+
+		JButton boton = new JButton("Spring");
+		boton.addActionListener( new ActionListener (){
+				public void actionPerformed(ActionEvent event) {
+					Spring sp0 = new Spring(1.0, 1.0);
+					world.addElement(sp0);
+				};
+			});
+		add(boton);
+
+		boton = new JButton("Start");
+		boton.addActionListener( new ActionListener (){
+				public void actionPerformed(ActionEvent event) {
+					world.start();
+				};
+			});
+		add(boton);
+
+		boton = new JButton("Stop");
+		boton.addActionListener( new ActionListener (){
+				public void actionPerformed(ActionEvent event) {
+					world.stop();
+				};
+			});
+		add(boton);
+
+		validate();
 	}
 
 	public void repaintView() {
