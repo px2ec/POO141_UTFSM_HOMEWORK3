@@ -226,4 +226,40 @@ public class MyWorld implements ActionListener {
 		}
 		return inpos;
 	}
+
+	/**
+	* Get total potential energy from spring and rubber.
+	* @return Total potential energy
+	*/
+	public double getTotalPotential() {
+		double potential = 0;
+		for (PhysicsElement e: elements) {
+			if (e instanceof Elastic) potential += ((Elastic)e).getPotential();
+		}
+		return potential;
+	}
+
+	/**
+	* Get total kinetic energy from spring and rubber.
+	* @return Total kinetic energy
+	*/
+	public double getTotalKinetic() {
+		double kinetic = 0;
+		for (PhysicsElement e: elements) {
+			if (e instanceof SpringAttachable) {
+				SpringAttachable sa = (SpringAttachable)e;
+				double sub_kinetic = (sa.getSpeed())*(sa.getSpeed())*(sa.getMass())*(0.5);
+				kinetic += sub_kinetic;
+			}
+		}
+		return kinetic;
+	}
+
+	/**
+	* Get total mechanical energy from spring and rubber.
+	* @return Total mechanical energy
+	*/
+	public double getTotalMechanical() {
+		return getTotalKinetic() + getTotalPotential();
+	}
 }
