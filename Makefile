@@ -65,7 +65,7 @@ run: $(MAIN).class
 	$(JVM) $(MAIN)
 
 clean:
-	rm -rf *.class
+	rm -rf *.class *.jar
 
 mrproper:
 	make clean
