@@ -69,7 +69,8 @@ public class MyWorldView extends JPanel {
 		/* .......*/
 		ArrayList<PhysicsElement> elements = world.getPhysicsElements();
 		for (PhysicsElement e: elements) {
-			if (e instanceof Ball || e instanceof FixedHook || e instanceof Spring || e instanceof Block || e instanceof Rubber) {
+			if (e instanceof Ball || e instanceof FixedHook || 
+				e instanceof Spring || e instanceof Block || e instanceof Rubber || e instanceof Oscillator) {
 				e.updateView(g2);
 			}
 		}
