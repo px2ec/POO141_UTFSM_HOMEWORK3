@@ -9,38 +9,50 @@ import java.net.URL;
 
 public class PhysicsLab extends JApplet{
 
+	// Applet program
 	protected URL codeBase = null;
     protected AudioClip beepClip;
+
+    // Max plot time for graphics
     private double maxPlotTime = 15;
 
 	public void init()
 	{  
+		// Check param maxPlotTime
 		if (getParameter("maxPlotTime") != null)
 			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
 
-		String deltaTime = getParameter("deltaTime");
+		// Create a world
 		MyWorld world = new MyWorld(this);
+
+		// Check param deltaTime
+		String deltaTime = getParameter("deltaTime");
 		if (deltaTime != null) world.setDelta_t(Double.parseDouble(deltaTime));
 
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
+		
+		// Asign title param from document
 		String title = getParameter("title");
 
 		MyWorldView  worldView = new MyWorldView(world);
 		PhysicsLab_GUI_OnlyMenu labmenugui = new PhysicsLab_GUI_OnlyMenu(world, title);
 
+		//Graphic interface		
 		labmenugui.setVisible(true);
 
-		world.setView(worldView);
-
+		// Get parameters from document and adds elements
 		getParamFromHTML(world);
 
+		// Sound
 		codeBase = getCodeBase();
-
 		beepClip = getAudioClip(codeBase, "audio/beep.au");
 
+		// Add worldView to content pane
+		world.setView(worldView);
 		add(worldView);  
 	}
 
+	// Sound function
 	public void beepcol(){
 		if (beepClip != null) beepClip.play();
 	}
@@ -128,6 +140,7 @@ public class PhysicsLab extends JApplet{
 	}
 
 //----------------------------------------------------------------
+	// Application
 	public static void main(String[] args) {
 		PhysicsLab_GUI lab_gui = new PhysicsLab_GUI();
 		lab_gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
