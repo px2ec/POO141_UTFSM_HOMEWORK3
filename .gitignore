@@ -12,6 +12,7 @@ package-list
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
+*.mf
 
 # Package Files #
 *.jar
