@@ -78,7 +78,8 @@ rerun:
 	make rebuild && make run
 
 jar:
-	jar cf PhysicsLab.jar *.class PhysicsLab.class
+	echo Main-Class: PhysicsLab > MANIFEST.mf
+	jar cmf MANIFEST.mf PhysicsLab.jar *.class
 
 runApplet:
 	appletviewer PhysicsLab.html
