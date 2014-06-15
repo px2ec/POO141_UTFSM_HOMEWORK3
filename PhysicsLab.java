@@ -11,15 +11,18 @@ public class PhysicsLab extends JApplet{
 
 	protected URL codeBase = null;
     protected AudioClip beepClip;
+    private double maxPlotTime = 15;
 
 	public void init()
 	{  
+		if (getParameter("maxPlotTime") != null)
+			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
+
 		String deltaTime = getParameter("deltaTime");
 		MyWorld world = new MyWorld(this);
 		if (deltaTime != null) world.setDelta_t(Double.parseDouble(deltaTime));
-		
+
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
-		
 		String title = getParameter("title");
 
 		MyWorldView  worldView = new MyWorldView(world);
