@@ -32,6 +32,10 @@ public class MyWorld implements ActionListener {
 		this(System.out, -9.8, null);
 	}
 
+	/**
+	* Constructor Myworld. Initialize a new physic World with custom params.
+	* @param pl  PhysicsLab class
+	*/
 	public MyWorld(PhysicsLab pl) {
 		this(System.out, -9.8, pl);
 	}
@@ -39,6 +43,7 @@ public class MyWorld implements ActionListener {
 	/**
 	* Constructor Myworld. Initialize a new physic World with custom params.
 	* @param output  text out
+	* @param pl  PhysicsLab class
 	*/
 	public MyWorld(PrintStream output, PhysicsLab pl) {
 		this(output, -9.8, pl); 
@@ -48,6 +53,7 @@ public class MyWorld implements ActionListener {
 	* Constructor Myworld. Initialize a new physic World with custom params.
 	* @param output  text out
 	* @param gravity   World's gravity
+	* @param pl  PhysicsLab class
 	*/
 	public MyWorld(PrintStream output, double gravity, PhysicsLab pl) {
 		view = null;
