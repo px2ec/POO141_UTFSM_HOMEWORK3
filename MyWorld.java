@@ -246,7 +246,7 @@ public class MyWorld implements ActionListener {
 	}
 
 	/**
-	* Get total kinetic energy from spring and rubber.
+	* Get total kinetic energy from balls and blocks.
 	* @return Total kinetic energy
 	*/
 	public double getTotalKinetic() {
@@ -262,7 +262,7 @@ public class MyWorld implements ActionListener {
 	}
 
 	/**
-	* Get total mechanical energy from spring and rubber.
+	* Get total mechanical energy from elements.
 	* @return Total mechanical energy
 	*/
 	public double getTotalMechanical() {
