@@ -44,7 +44,7 @@ public class PhysicsLab extends JApplet{
 		int fixedHookNum = 0;
 		int blockNum = 0;
 		int rubberNum = 0;
-		int ocillatorNum = 0;
+		int oscillatorNum = 0;
 
 		if (getParameter("ballNum") != null)
 			ballNum = Integer.parseInt(getParameter("ballNum"));
@@ -61,8 +61,8 @@ public class PhysicsLab extends JApplet{
 		if (getParameter("rubberNum") != null)
 			rubberNum = Integer.parseInt(getParameter("rubberNum"));
 
-		if (getParameter("ocillatorNum") != null)
-			ocillatorNum = Integer.parseInt(getParameter("ocillatorNum"));
+		if (getParameter("oscillatorNum") != null)
+			oscillatorNum = Integer.parseInt(getParameter("oscillatorNum"));
 		
 
 		for (int j = 0; j < ballNum; j++) {
@@ -108,12 +108,12 @@ public class PhysicsLab extends JApplet{
 			world.addElement(rb0);
 		}		
 
-		for (int j = 0; j < ocillatorNum; j++) {
-			String ocillatorparams = getParameter("ocillator." + (j + 1));
+		for (int j = 0; j < oscillatorNum; j++) {
+			String oscillatorparams = getParameter("oscillator." + (j + 1));
 
-			String ocillatorvalues[] = ocillatorparams.split(";");
-			Oscillator osc0 = new Oscillator(Double.parseDouble(ocillatorvalues[0]),
-					 Double.parseDouble(ocillatorvalues[1]), Double.parseDouble(ocillatorvalues[2]));
+			String oscillatorvalues[] = oscillatorparams.split(";");
+			Oscillator osc0 = new Oscillator(Double.parseDouble(oscillatorvalues[0]),
+					 Double.parseDouble(oscillatorvalues[1]), Double.parseDouble(oscillatorvalues[2]));
 			world.addElement(osc0);
 		}
 
