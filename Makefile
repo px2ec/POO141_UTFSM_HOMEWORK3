@@ -17,6 +17,8 @@ CLASSES = \
 	SpringView.class \
 	Rubber.class \
 	RubberView.class \
+	Oscillator.class \
+	OscillatorView.class \
 	SpringAttachable.class\
 	LabMenuListener.class \
 	Simulateable.class \
@@ -38,6 +40,8 @@ SOURCES = \
 	SpringView.java \
 	Rubber.java \
 	RubberView.java \
+	Oscillator.java \
+	OscillatorView.java \
 	SpringAttachable.java\
 	LabMenuListener.java \
 	Simulateable.java \

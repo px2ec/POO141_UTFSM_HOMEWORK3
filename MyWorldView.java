@@ -53,33 +53,6 @@ public class MyWorldView extends JPanel {
 		addMouseListener(mListener);
 		addKeyListener(mListener);
 		setFocusable(true);    
-
-		JButton boton = new JButton("Spring");
-		boton.addActionListener( new ActionListener (){
-				public void actionPerformed(ActionEvent event) {
-					Spring sp0 = new Spring(1.0, 1.0);
-					world.addElement(sp0);
-				};
-			});
-		add(boton);
-
-		boton = new JButton("Start");
-		boton.addActionListener( new ActionListener (){
-				public void actionPerformed(ActionEvent event) {
-					world.start();
-				};
-			});
-		add(boton);
-
-		boton = new JButton("Stop");
-		boton.addActionListener( new ActionListener (){
-				public void actionPerformed(ActionEvent event) {
-					world.stop();
-				};
-			});
-		add(boton);
-
-		validate();
 	}
 
 	public void repaintView() {
@@ -88,7 +61,7 @@ public class MyWorldView extends JPanel {
 	public void paintComponent(Graphics g) {
 		Graphics2D g2 = (Graphics2D)g;
 		super.paintComponent(g); // It paints the background
-		g2.drawString("ELO329 1er.Sem. 2014,   1 [m] = "+AXES_SCALE+" [pixels]", WIDTH/4, 30);
+		g2.drawString("ELO329 1er.Sem. 2014,   1 [m] = "+AXES_SCALE+" [pixels]", WIDTH/4, 60);
 		g2.transform(SPACE_TRANSFORM);
 		g2.setStroke(new BasicStroke(0.02f));
 		g2.draw(X_AXIS);
@@ -100,6 +73,7 @@ public class MyWorldView extends JPanel {
 				e.updateView(g2);
 			}
 		}
+		validate();
 	}
 
 	/**/
