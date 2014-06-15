@@ -14,11 +14,16 @@ public class PhysicsLab extends JApplet{
 
 	public void init()
 	{  
+		String deltaTime = getParameter("deltaTime");
 		MyWorld world = new MyWorld(this);
+		if (deltaTime != null) world.setDelta_t(Double.parseDouble(deltaTime));
+		
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
 		
+		String title = getParameter("title");
+
 		MyWorldView  worldView = new MyWorldView(world);
-		PhysicsLab_GUI_OnlyMenu labmenugui = new PhysicsLab_GUI_OnlyMenu(world);
+		PhysicsLab_GUI_OnlyMenu labmenugui = new PhysicsLab_GUI_OnlyMenu(world, title);
 
 		labmenugui.setVisible(true);
 
@@ -119,6 +124,7 @@ public class PhysicsLab extends JApplet{
 
 	}
 
+//----------------------------------------------------------------
 	public static void main(String[] args) {
 		PhysicsLab_GUI lab_gui = new PhysicsLab_GUI();
 		lab_gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -126,6 +132,7 @@ public class PhysicsLab extends JApplet{
 	}
 }
 
+//------------------------------------------------------------------------------------------
 class PhysicsLab_GUI extends JFrame {
 	MyWorld world = new MyWorld();
 	public PhysicsLab_GUI() {
@@ -210,11 +217,12 @@ class PhysicsLab_GUI extends JFrame {
 	}
 }
 
-
+//------------------------------------------------------------------------------------------
 class PhysicsLab_GUI_OnlyMenu extends JFrame {
-	public PhysicsLab_GUI_OnlyMenu(MyWorld w) {
-		MyWorld world = w;
+	public PhysicsLab_GUI_OnlyMenu(MyWorld w, String title) {
 		setTitle("My Small and Nice Physics Laboratory");
+		if (title != null) setTitle(title);
+		MyWorld world = w;
 		setSize(MyWorldView.WIDTH, 100);  // height+50 to account for menu height
 
 		LabMenuListener menuListener = new LabMenuListener(world);
