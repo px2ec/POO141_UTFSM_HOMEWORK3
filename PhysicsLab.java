@@ -3,12 +3,18 @@ import javax.swing.*;
 import java.awt.Container;
 import javax.swing.KeyStroke;
 import java.awt.event.*;
+import java.applet.AudioClip;
+import java.applet.Applet;
+import java.net.URL;
 
 public class PhysicsLab extends JApplet{
 
+	protected URL codeBase = null;
+    protected AudioClip beepClip;
+
 	public void init()
 	{  
-		MyWorld world = new MyWorld();
+		MyWorld world = new MyWorld(this);
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
 		
 		MyWorldView  worldView = new MyWorldView(world);
@@ -20,7 +26,15 @@ public class PhysicsLab extends JApplet{
 
 		getParamFromHTML(world);
 
+		codeBase = getCodeBase();
+
+		beepClip = getAudioClip(codeBase, "audio/beep.au");
+
 		add(worldView);  
+	}
+
+	public void beepcol(){
+		if (beepClip != null) beepClip.play();
 	}
 
 	private void getParamFromHTML(MyWorld world) {
