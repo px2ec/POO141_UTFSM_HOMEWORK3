@@ -147,4 +147,11 @@ public class Rubber extends PhysicsElement implements Simulateable, Elastic {
 		}
 
 	}
+
+	public double getPotential() {
+		double force = 0;
+		if (a_end != null) force = getForce(a_end);
+		else if (b_end != null) force = getForce(b_end);
+		return Math.abs(a_end.getPosition() - bLoosePosition)*Math.abs(force)*(0.5);
+	}
 }

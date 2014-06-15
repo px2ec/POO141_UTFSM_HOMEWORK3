@@ -9,4 +9,5 @@ interface Elastic {
 	double getBendPosition();
 	double getRestLength();
 	double getForce(SpringAttachable sa);
+	double getPotential();
 }
