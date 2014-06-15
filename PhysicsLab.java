@@ -13,7 +13,79 @@ public class PhysicsLab extends JApplet{
 		
 		MyWorldView  worldView = new MyWorldView(world);
 		world.setView(worldView);
+
+		getParamFromHTML(world);
+
 		add(worldView);  
+	}
+
+	private void getParamFromHTML(MyWorld world) {
+
+		int ballNum = 0;
+		int springNum = 0;
+		int fixedHookNum = 0;
+		int blockNum = 0;
+		int rubberNum = 0;
+
+		if (getParameter("ballNum") != null)
+			ballNum = Integer.parseInt(getParameter("ballNum"));
+		
+		if (getParameter("springNum") != null)
+			springNum = Integer.parseInt(getParameter("springNum"));
+		
+		if (getParameter("fixedHookNum") != null)
+			fixedHookNum = Integer.parseInt(getParameter("fixedHookNum"));
+		
+		if (getParameter("blockNum") != null)
+			blockNum = Integer.parseInt(getParameter("blockNum"));
+		
+		if (getParameter("rubberNum") != null)
+			rubberNum = Integer.parseInt(getParameter("rubberNum"));
+		
+
+		for (int j = 0; j < ballNum; j++) {
+			String ballparams = getParameter("ball." + (j + 1));
+
+			String ballvalues[] = ballparams.split(";");
+			Ball b0 = new Ball(Double.parseDouble(ballvalues[0]), Double.parseDouble(ballvalues[1]), 
+								Double.parseDouble(ballvalues[2]), Double.parseDouble(ballvalues[3]));
+			world.addElement(b0);   
+		}
+	
+		for (int j = 0; j < springNum; j++) {
+			String springparams = getParameter("spring." + (j + 1));
+
+			String springvalues[] = springparams.split(";");
+			Spring sp0 = new Spring(Double.parseDouble(springvalues[0]), Double.parseDouble(springvalues[0]));
+			world.addElement(sp0);
+		}
+
+		for (int j = 0; j < fixedHookNum; j++) {
+			String fixedHookparams = getParameter("fixedHook." + (j + 1));
+
+			String fixedHookvalues[] = fixedHookparams.split(";");
+			FixedHook f0 = new FixedHook(Double.parseDouble(fixedHookvalues[0]));
+			world.addElement(f0);
+		}
+
+		for (int j = 0; j < blockNum; j++) {
+			String blockparams = getParameter("block." + (j + 1));
+
+			String blockvalues[] = blockparams.split(";");
+			Block bl = new Block(Double.parseDouble(blockvalues[0]), 
+				Double.parseDouble(blockvalues[0]), Double.parseDouble(blockvalues[0]), 
+				Double.parseDouble(blockvalues[0]), Double.parseDouble(blockvalues[0]));
+			world.addElement(bl);
+		}
+
+		for (int j = 0; j < rubberNum; j++) {
+			String rubberparams = getParameter("rubber." + (j + 1));
+
+			String rubbervalues[] = rubberparams.split(";");
+			Rubber rb0 = new Rubber(Double.parseDouble(rubbervalues[0]), Double.parseDouble(rubbervalues[0]));
+			world.addElement(rb0);
+		}
+
 	}
 
 	public static void main(String[] args) {
