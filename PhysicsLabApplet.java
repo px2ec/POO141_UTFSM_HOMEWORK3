@@ -159,7 +159,7 @@ class PhysicsLab_GUI_Internal extends JInternalFrame {
 		MyWorldView  worldView = new MyWorldView(world);
 		// Asigns WorldView
 		world.setView(worldView);
-		setSize(MyWorldView.WIDTH+100, MyWorldView.HEIGHT+100);  // height+50 to account for menu height
+		setSize(MyWorldView.WIDTH+50, MyWorldView.HEIGHT+100);  // height+50 to account for menu height
 		add(worldView);  
 		LabMenuListener menuListener = new LabMenuListener(world);
 		this.setJMenuBar(this.createLabMenuBar(menuListener));
