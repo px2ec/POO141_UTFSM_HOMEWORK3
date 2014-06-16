@@ -38,14 +38,10 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		// Asign title param from document
 		String title = getParameter("title");
 
-		MyWorldView  worldView = new MyWorldView(world);
-		PhysicsLab_GUI_OnlyMenu labmenugui = new PhysicsLab_GUI_OnlyMenu(world, title);
+		PhysicsLab_GUI_Internal labinternalgui = new PhysicsLab_GUI_Internal(world, title);
 
 		//Graphic interface		
-		labmenugui.setVisible(true);
-
-		// Asigns WorldView
-		world.setView(worldView);
+		labinternalgui.setVisible(true);
 
 		// Get parameters from document and adds elements
 		getParamFromHTML(world);
@@ -55,7 +51,7 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		beepClip = getAudioClip(codeBase, "audio/beep.au");
 
 		// Add worldView to content pane
-		add(worldView);  
+		add(labinternalgui);  
 	}
 
 	// Sound function
@@ -157,13 +153,16 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 }
 
 //------------------------------------------------------------------------------------------
-class PhysicsLab_GUI_OnlyMenu extends JFrame {
-	public PhysicsLab_GUI_OnlyMenu(MyWorld w, String title) {
+class PhysicsLab_GUI_Internal extends JInternalFrame {
+	public PhysicsLab_GUI_Internal(MyWorld w, String title) {
 		setTitle("My Small and Nice Physics Laboratory");
 		if (title != null) setTitle(title);
 		MyWorld world = w;
-		setSize(MyWorldView.WIDTH, 100);  // height+50 to account for menu height
-
+		MyWorldView  worldView = new MyWorldView(world);
+		// Asigns WorldView
+		world.setView(worldView);
+		setSize(MyWorldView.WIDTH+100, MyWorldView.HEIGHT+100);  // height+50 to account for menu height
+		add(worldView);  
 		LabMenuListener menuListener = new LabMenuListener(world);
 		this.setJMenuBar(this.createLabMenuBar(menuListener));
 
