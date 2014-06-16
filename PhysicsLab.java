@@ -3,9 +3,6 @@ import javax.swing.*;
 import java.awt.Container;
 import javax.swing.KeyStroke;
 import java.awt.event.*;
-import java.applet.AudioClip;
-import java.applet.Applet;
-import java.net.URL;
 
 public class PhysicsLab extends JApplet implements PhysicsLabClass{
 	// Application
