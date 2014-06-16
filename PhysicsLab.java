@@ -18,16 +18,20 @@ public class PhysicsLab extends JApplet{
 
 	public void init()
 	{  
-		// Check param maxPlotTime
+		// Check maxPlotTime parameter
 		if (getParameter("maxPlotTime") != null)
 			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
 
 		// Create a world
 		MyWorld world = new MyWorld(this);
 
-		// Check param deltaTime
-		String deltaTime = getParameter("deltaTime");
-		if (deltaTime != null) world.setDelta_t(Double.parseDouble(deltaTime));
+		// Check delta time parameter
+		if (getParameter("deltaTime") != null) 
+			world.setDelta_t(Double.parseDouble(getParameter("deltaTime")));
+
+		// Check refresh time parameter
+		if (getParameter("refreshTime") != null) 
+			world.setRefreshPeriod(Double.parseDouble(getParameter("refreshTime")));
 
 		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
 		
@@ -40,6 +44,9 @@ public class PhysicsLab extends JApplet{
 		//Graphic interface		
 		labmenugui.setVisible(true);
 
+		// Asigns WorldView
+		world.setView(worldView);
+
 		// Get parameters from document and adds elements
 		getParamFromHTML(world);
 
@@ -48,7 +55,6 @@ public class PhysicsLab extends JApplet{
 		beepClip = getAudioClip(codeBase, "audio/beep.au");
 
 		// Add worldView to content pane
-		world.setView(worldView);
 		add(worldView);  
 	}
 
