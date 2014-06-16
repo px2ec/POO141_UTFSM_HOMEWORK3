@@ -13,6 +13,8 @@ CLASSES = \
 	BlockView.class \
 	MyWorld.class \
 	PhysicsLab.class \
+	PhysicsLabApplet.class \
+	PhysicsLabClass.class \
 	PhysicsElement.class \
 	FixedHook.class \
 	FixedHookView.class \
@@ -36,6 +38,8 @@ SOURCES = \
 	BlockView.java \
 	MyWorld.java \
 	PhysicsLab.java \
+	PhysicsLabApplet.java \
+	PhysicsLabClass.java \
 	PhysicsElement.java \
 	FixedHook.java \
 	FixedHookView.java \
