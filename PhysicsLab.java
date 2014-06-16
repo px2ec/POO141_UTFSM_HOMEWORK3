@@ -215,10 +215,6 @@ class PhysicsLab_GUI extends JFrame {
 		menuItem.addActionListener(menu_l);
 		menu.add(menuItem);
 
-		menuItem = new JMenuItem("Next Item");
-		menuItem.addActionListener(menu_l);
-		menu.add(menuItem);
-
 		JMenu submenu = new JMenu("Simulator");
 
 		menuItem = new JMenuItem("Delta time");
@@ -295,10 +291,6 @@ class PhysicsLab_GUI_OnlyMenu extends JFrame {
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Stop");
-		menuItem.addActionListener(menu_l);
-		menu.add(menuItem);
-
-		menuItem = new JMenuItem("Next Item");
 		menuItem.addActionListener(menu_l);
 		menu.add(menuItem);
 
