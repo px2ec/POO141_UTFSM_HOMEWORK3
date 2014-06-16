@@ -16,6 +16,7 @@ public class PhysicsLab extends JApplet implements PhysicsLabClass{
 	}
 
 	public void beepcol() {}
+	public void resetPlotPL() {}
 
 	public boolean isApplet() {
 		return false;

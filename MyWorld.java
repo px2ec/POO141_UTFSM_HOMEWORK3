@@ -138,6 +138,14 @@ public class MyWorld implements ActionListener {
 	}
 
 	/**
+	* Reset plot.
+	*/
+	public void resetPlot() {
+		if (phylab != null)
+			phylab.resetPlotPL();
+	}
+
+	/**
 	* Simulate iterative way.
 	* @param event   param for listener
 	*/
@@ -183,7 +191,9 @@ public class MyWorld implements ActionListener {
 			if ((e instanceof Ball) || (e instanceof Block)) {
 				SpringAttachable b = (SpringAttachable)e;
 				if ((b!=me) && b.collide(me)) {
-					if (phylab != null) phylab.beepcol();
+					if (phylab != null) 
+						if (phylab.isApplet())
+							phylab.beepcol();
 					return b;
 				}
 			}
