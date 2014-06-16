@@ -23,7 +23,7 @@ public class MyWorld implements ActionListener {
 	private double gravity;
 	private ArrayList<PhysicsElement> inpos;
 
-	private PhysicsLab phylab;
+	private PhysicsLabClass phylab;
 
 	/**
 	* Constructor Myworld. Initialize a new physic World.
@@ -36,7 +36,7 @@ public class MyWorld implements ActionListener {
 	* Constructor Myworld. Initialize a new physic World with custom params.
 	* @param pl  PhysicsLab class
 	*/
-	public MyWorld(PhysicsLab pl) {
+	public MyWorld(PhysicsLabClass pl) {
 		this(System.out, -9.8, pl);
 	}
 
@@ -45,7 +45,7 @@ public class MyWorld implements ActionListener {
 	* @param output  text out
 	* @param pl  PhysicsLab class
 	*/
-	public MyWorld(PrintStream output, PhysicsLab pl) {
+	public MyWorld(PrintStream output, PhysicsLabClass pl) {
 		this(output, -9.8, pl); 
 	}
 
@@ -55,7 +55,7 @@ public class MyWorld implements ActionListener {
 	* @param gravity   World's gravity
 	* @param pl  PhysicsLab class
 	*/
-	public MyWorld(PrintStream output, double gravity, PhysicsLab pl) {
+	public MyWorld(PrintStream output, double gravity, PhysicsLabClass pl) {
 		view = null;
 		this.gravity = gravity;
 		out = output;
@@ -183,7 +183,7 @@ public class MyWorld implements ActionListener {
 			if ((e instanceof Ball) || (e instanceof Block)) {
 				SpringAttachable b = (SpringAttachable)e;
 				if ((b!=me) && b.collide(me)) {
-					if (phylab != null) phylab.beepcol();
+					if (phylab != null && phylab.isApplet()) phylab.beepcol();
 					return b;
 				}
 			}
