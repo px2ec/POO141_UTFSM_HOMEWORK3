@@ -63,8 +63,14 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		if (beepClip != null) beepClip.play();
 	}
 
+	// Check is runnig applet
 	public boolean isApplet() {
 		return true;
+	}
+
+	// Reset plot trigger
+	public void resetPlotPL() {
+		// do something 
 	}
 
 	private void getParamFromHTML(MyWorld world) {
@@ -206,6 +212,10 @@ class PhysicsLab_GUI_OnlyMenu extends JFrame {
 		menu.add(menuItem);
 
 		menuItem = new JMenuItem("Stop");
+		menuItem.addActionListener(menu_l);
+		menu.add(menuItem);
+
+		menuItem = new JMenuItem("Reset Plot");
 		menuItem.addActionListener(menu_l);
 		menu.add(menuItem);
 
