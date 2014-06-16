@@ -32,8 +32,6 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		// Check refresh time parameter
 		if (getParameter("refreshTime") != null) 
 			world.setRefreshPeriod(Double.parseDouble(getParameter("refreshTime")));
-
-		setSize(MyWorldView.WIDTH, MyWorldView.HEIGHT+50);  // height+50 to account for menu height
 		
 		// Asign title param from document
 		String title = getParameter("title");
