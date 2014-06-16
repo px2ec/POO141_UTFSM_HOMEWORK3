@@ -183,7 +183,7 @@ public class MyWorld implements ActionListener {
 			if ((e instanceof Ball) || (e instanceof Block)) {
 				SpringAttachable b = (SpringAttachable)e;
 				if ((b!=me) && b.collide(me)) {
-					if (phylab != null && phylab.isApplet()) phylab.beepcol();
+					if (phylab != null) phylab.beepcol();
 					return b;
 				}
 			}
