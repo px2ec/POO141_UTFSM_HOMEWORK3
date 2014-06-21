@@ -17,7 +17,8 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
     private double maxPlotTime = 15;
 
 	public void init()
-	{  
+	{
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		// Check maxPlotTime parameter
 		if (getParameter("maxPlotTime") != null)
 			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
@@ -37,10 +38,11 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		String title = getParameter("title");
 
 		PhysicsLab_GUI_Internal labinternalgui = new PhysicsLab_GUI_Internal(world, title);
+		DynamicData graphics = new DynamicData("Graficos");
 
 		//Graphic interface		
 		labinternalgui.setVisible(true);
-
+		graphics.setVisible(true);
 		// Get parameters from document and adds elements
 		getParamFromHTML(world);
 
@@ -49,7 +51,9 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		beepClip = getAudioClip(codeBase, "audio/beep.au");
 
 		// Add worldView to content pane
-		add(labinternalgui);  
+		sp.add(labinternalgui);
+		sp.add(graphics);
+		add(sp);  
 	}
 
 	// Sound function

@@ -29,6 +29,7 @@ CLASSES = \
 	Simulateable.class \
 	MyWorldView.class \
 	MouseListener.class \
+	DynamicData.class \
 	Elastic.class
 
 SOURCES = \
@@ -54,6 +55,7 @@ SOURCES = \
 	Simulateable.java \
 	MyWorldView.java \
 	MouseListener.java \
+	DynamicData.class \
 	Elastic.java
 
 MAIN = PhysicsLab
