@@ -50,12 +50,13 @@ public class DynamicData extends JInternalFrame {
         t_start = new Date();
         final CombinedDomainXYPlot plot = new CombinedDomainXYPlot(new DateAxis("Time"));
         this.datasets = new TimeSeriesCollection[SUBPLOT_COUNT];
-        
+        String types[] = {"Potential", "Kinetic", "Total"};
+
         for (int i = 0; i < SUBPLOT_COUNT; i++) {
             this.lastValue[i] = 100.0;
-            final TimeSeries series = new TimeSeries("Random " + i, FixedMillisecond.class);
+            final TimeSeries series = new TimeSeries(types[i], FixedMillisecond.class);
             this.datasets[i] = new TimeSeriesCollection(series);
-            final NumberAxis rangeAxis = new NumberAxis("Y" + i);
+            final NumberAxis rangeAxis = new NumberAxis(types[i]);
             rangeAxis.setAutoRangeIncludesZero(false);
             final XYPlot subplot = new XYPlot(
                     this.datasets[i], null, rangeAxis, new StandardXYItemRenderer()
@@ -66,7 +67,7 @@ public class DynamicData extends JInternalFrame {
             plot.add(subplot);
         }
 
-        final JFreeChart chart = new JFreeChart("Dynamic Data Demo 3", plot);
+        final JFreeChart chart = new JFreeChart("Energy of system", plot);
 //        chart.getLegend().setAnchor(Legend.EAST);
         chart.setBorderPaint(Color.black);
         chart.setBorderVisible(true);
@@ -85,20 +86,6 @@ public class DynamicData extends JInternalFrame {
         final ChartPanel chartPanel = new ChartPanel(chart);
         content.add(chartPanel);
 
-        // final JPanel buttonPanel = new JPanel(new FlowLayout());
-        //         
-        //         for (int i = 0; i < SUBPLOT_COUNT; i++) {
-        //             final JButton button = new JButton("Series " + i);
-        //             button.setActionCommand("ADD_DATA_" + i);
-        //             button.addActionListener(this);
-        //             buttonPanel.add(button);
-        //         }
-        //         final JButton buttonAll = new JButton("ALL");
-        //         buttonAll.setActionCommand("ADD_ALL");
-        //         buttonAll.addActionListener(this);
-        //         buttonPanel.add(buttonAll);
-        //         
-        //         content.add(buttonPanel, BorderLayout.SOUTH);
         chartPanel.setPreferredSize(new java.awt.Dimension(500, 470));
         chartPanel.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
         setContentPane(content);
