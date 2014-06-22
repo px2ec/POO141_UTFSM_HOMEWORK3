@@ -13,7 +13,7 @@ public class PhysicsLab extends JApplet implements PhysicsLabClass{
 	}
 
 	public void beepcol() {}
-	public void resetPlotPL() {}
+	public void resetPlotPL(DynamicData plot) {}
 
 	public boolean isApplet() {
 		return false;
