@@ -23,8 +23,10 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		if (getParameter("maxPlotTime") != null)
 			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
 
+		//Plot interface
+		DynamicData plot = new DynamicData("Graficos");
 		// Create a world
-		MyWorld world = new MyWorld(this);
+		MyWorld world = new MyWorld(this, plot);
 
 		// Check delta time parameter
 		if (getParameter("deltaTime") != null) 
@@ -36,13 +38,12 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		
 		// Asign title param from document
 		String title = getParameter("title");
-
+		
 		PhysicsLab_GUI_Internal labinternalgui = new PhysicsLab_GUI_Internal(world, title);
-		DynamicData graphics = new DynamicData("Graficos");
 
 		//Graphic interface		
 		labinternalgui.setVisible(true);
-		graphics.setVisible(true);
+		plot.setVisible(true);
 		// Get parameters from document and adds elements
 		getParamFromHTML(world);
 
@@ -52,7 +53,7 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 
 		// Add worldView to content pane
 		sp.add(labinternalgui);
-		sp.add(graphics);
+		sp.add(plot);
 		add(sp);  
 	}
 
@@ -67,8 +68,8 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 	}
 
 	// Reset plot trigger
-	public void resetPlotPL() {
-		// do something 
+	public void resetPlotPL(DynamicData plot) {
+		plot.reset();
 	}
 
 	private void getParamFromHTML(MyWorld world) {

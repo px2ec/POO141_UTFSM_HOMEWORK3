@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import java.util.*;
+import java.util.Date;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -19,6 +20,7 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CombinedDomainXYPlot;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.StandardXYItemRenderer;
+import org.jfree.data.time.FixedMillisecond;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
@@ -26,7 +28,7 @@ import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
 public class DynamicData extends JInternalFrame {
-
+	Date t_start;
     /** The number of subplots. */
     public static final int SUBPLOT_COUNT = 3;
     
@@ -44,13 +46,14 @@ public class DynamicData extends JInternalFrame {
     public DynamicData(final String title) {
 
         super(title);
-        
+
+        t_start = new Date();
         final CombinedDomainXYPlot plot = new CombinedDomainXYPlot(new DateAxis("Time"));
         this.datasets = new TimeSeriesCollection[SUBPLOT_COUNT];
         
         for (int i = 0; i < SUBPLOT_COUNT; i++) {
             this.lastValue[i] = 100.0;
-            final TimeSeries series = new TimeSeries("Random " + i, Millisecond.class);
+            final TimeSeries series = new TimeSeries("Random " + i, FixedMillisecond.class);
             this.datasets[i] = new TimeSeriesCollection(series);
             final NumberAxis rangeAxis = new NumberAxis("Y" + i);
             rangeAxis.setAutoRangeIncludesZero(false);
@@ -102,33 +105,26 @@ public class DynamicData extends JInternalFrame {
 
     }
 
-    // ****************************************************************************
-    // * JFREECHART DEVELOPER GUIDE                                               *
-    // * The JFreeChart Developer Guide, written by David Gilbert, is available   *
-    // * to purchase from Object Refinery Limited:                                *
-    // *                                                                          *
-    // * http://www.object-refinery.com/jfreechart/guide.html                     *
-    // *                                                                          *
-    // * Sales are used to provide funding for the JFreeChart project - please    * 
-    // * support us so that we can continue developing free software.             *
-    // ****************************************************************************
-    
+
     /**
      * Handles a click on the button by adding new (random) data.
      *
      * @param e  the action event.
      */
-    public void updateGraphics() {
- 
-        for (int i = 0; i < SUBPLOT_COUNT; i++) {
-            //if (e.getActionCommand().endsWith(String.valueOf(i))) {
-                final Millisecond now = new Millisecond();
-                System.out.println("Now = " + now.toString());
-                this.lastValue[i] = this.lastValue[i] * (0.90 + 0.2 * Math.random());
-                this.datasets[i].getSeries(0).add(new Millisecond(), this.lastValue[i]);       
-        }
+	public void updateGraphics(double potential, double kinect, double total, double time) {
+		Date now = new Date((long) (t_start.getTime() + time*1000));
+		final FixedMillisecond t = new FixedMillisecond(now);
+ 		this.datasets[0].getSeries(0).addOrUpdate(t, potential);
+		this.datasets[1].getSeries(0).addOrUpdate(t, kinect);
+		this.datasets[2].getSeries(0).addOrUpdate(t, total);
 
     }
+	
+	public void reset(){
+		this.datasets[0].getSeries(0).clear();
+		this.datasets[1].getSeries(0).clear();
+		this.datasets[2].getSeries(0).clear();
+	}
 
     /**
      * Starting point for the demonstration application.
@@ -145,7 +141,7 @@ public class DynamicData extends JInternalFrame {
 
 		        @Override
 		        public void run() {
-		            demo.updateGraphics();
+		            //demo.updateGraphics();
 		        }
 		};
 

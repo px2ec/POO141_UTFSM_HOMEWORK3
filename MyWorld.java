@@ -22,6 +22,7 @@ public class MyWorld implements ActionListener {
 	private double refreshPeriod;  // in seconds
 	private double gravity;
 	private ArrayList<PhysicsElement> inpos;
+	private DynamicData plot;
 
 	private PhysicsLabClass phylab;
 
@@ -36,8 +37,9 @@ public class MyWorld implements ActionListener {
 	* Constructor Myworld. Initialize a new physic World with custom params.
 	* @param pl  PhysicsLab class
 	*/
-	public MyWorld(PhysicsLabClass pl) {
+	public MyWorld(PhysicsLabClass pl, DynamicData graphs) {
 		this(System.out, -9.8, pl);
+		this.plot = graphs;
 	}
 
 	/**
@@ -142,7 +144,7 @@ public class MyWorld implements ActionListener {
 	*/
 	public void resetPlot() {
 		if (phylab != null)
-			phylab.resetPlotPL();
+			phylab.resetPlotPL(plot);
 	}
 
 	/**
@@ -172,6 +174,7 @@ public class MyWorld implements ActionListener {
 				}
 			}
 		}
+		plot.updateGraphics(getTotalPotential(), getTotalKinetic(), getTotalMechanical(), t);
 	}
 
 	/**
