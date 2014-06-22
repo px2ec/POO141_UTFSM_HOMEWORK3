@@ -36,6 +36,7 @@ public class MyWorld implements ActionListener {
 	/**
 	* Constructor Myworld. Initialize a new physic World with custom params.
 	* @param pl  PhysicsLab class
+	* @param graphs  Chart class
 	*/
 	public MyWorld(PhysicsLabClass pl, DynamicData graphs) {
 		this(System.out, -9.8, pl);
