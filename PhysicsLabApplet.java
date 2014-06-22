@@ -17,13 +17,16 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
     private double maxPlotTime = 15;
 
 	public void init()
-	{  
+	{
+		JSplitPane sp = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT);
 		// Check maxPlotTime parameter
 		if (getParameter("maxPlotTime") != null)
 			maxPlotTime = Double.parseDouble(getParameter("maxPlotTime"));
 
+		//Plot interface
+		DynamicData plot = new DynamicData("Graficos");
 		// Create a world
-		MyWorld world = new MyWorld(this);
+		MyWorld world = new MyWorld(this, plot);
 
 		// Check delta time parameter
 		if (getParameter("deltaTime") != null) 
@@ -35,12 +38,12 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		
 		// Asign title param from document
 		String title = getParameter("title");
-
+		
 		PhysicsLab_GUI_Internal labinternalgui = new PhysicsLab_GUI_Internal(world, title);
 
 		//Graphic interface		
 		labinternalgui.setVisible(true);
-
+		plot.setVisible(true);
 		// Get parameters from document and adds elements
 		getParamFromHTML(world);
 
@@ -49,7 +52,9 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 		beepClip = getAudioClip(codeBase, "audio/beep.au");
 
 		// Add worldView to content pane
-		add(labinternalgui);  
+		sp.add(labinternalgui);
+		sp.add(plot);
+		add(sp);  
 	}
 
 	// Sound function
@@ -63,8 +68,8 @@ public class PhysicsLabApplet extends JApplet implements PhysicsLabClass{
 	}
 
 	// Reset plot trigger
-	public void resetPlotPL() {
-		// do something 
+	public void resetPlotPL(DynamicData plot) {
+		plot.reset();
 	}
 
 	private void getParamFromHTML(MyWorld world) {
